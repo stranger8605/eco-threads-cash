@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface RecycleState {
   // Auth
   phone: string;
-  password: string;
   isLoggedIn: boolean;
   // Profile
   gender: string;
@@ -35,7 +34,6 @@ interface RecycleContextType {
 
 const initialState: RecycleState = {
   phone: '',
-  password: '',
   isLoggedIn: false,
   gender: '',
   ageRange: '',
