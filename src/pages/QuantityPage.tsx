@@ -33,7 +33,7 @@ const QuantityPage = () => {
   const adjust = (id: string, delta: number) => {
     setQuantities((prev) => ({
       ...prev,
-      [id]: Math.max(1, (prev[id] || 1) + delta),
+      [id]: Math.min(100, Math.max(1, (prev[id] || 1) + delta)),
     }));
   };
 

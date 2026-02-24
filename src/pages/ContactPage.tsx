@@ -17,7 +17,7 @@ const ContactPage = () => {
     navigate('/quantity');
   };
 
-  const isValid = address && contactPhone && pickupDate && pickupTime;
+  const isValid = address && address.trim().length > 0 && /^[0-9]{10}$/.test(contactPhone) && pickupDate && pickupTime;
 
   return (
     <StepLayout
@@ -36,9 +36,10 @@ const ContactPage = () => {
           </label>
           <textarea
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => setAddress(e.target.value.slice(0, 500))}
             placeholder="Door No, Street, Area, City"
             rows={3}
+            maxLength={500}
             className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
           />
         </div>
@@ -50,7 +51,7 @@ const ContactPage = () => {
           <input
             type="tel"
             value={contactPhone}
-            onChange={(e) => setContactPhone(e.target.value)}
+            onChange={(e) => setContactPhone(e.target.value.replace(/\D/g, ''))}
             placeholder="Your phone number"
             maxLength={10}
             className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"

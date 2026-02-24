@@ -14,7 +14,8 @@ const LoginPage = () => {
   const [otp, setOtp] = useState('');
 
   const handleLogin = () => {
-    update({ phone, password, isLoggedIn: true });
+    // Note: In production, authenticate via server-side before setting isLoggedIn
+    update({ phone, isLoggedIn: true });
     navigate('/profile');
   };
 
@@ -36,11 +37,11 @@ const LoginPage = () => {
         <div className="space-y-4">
           <div className="relative">
             <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <input
+          <input
               type="tel"
               placeholder="Mobile Number"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
               maxLength={10}
               className="w-full pl-11 pr-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
@@ -89,7 +90,7 @@ const LoginPage = () => {
 
           <button
             onClick={handleLogin}
-            disabled={!phone || (!isOtp && !password) || (isOtp && otp.length < 6)}
+            disabled={!/^[0-9]{10}$/.test(phone) || (!isOtp && password.length < 8) || (isOtp && !/^[0-9]{6}$/.test(otp))}
             className="w-full py-3.5 rounded-xl font-semibold text-primary-foreground eco-gradient eco-shadow disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
           >
             {isOtp ? 'Verify OTP' : 'Login'}
