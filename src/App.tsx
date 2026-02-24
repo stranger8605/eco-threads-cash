@@ -15,6 +15,7 @@ import QuantityPage from "./pages/QuantityPage";
 import PricingPage from "./pages/PricingPage";
 import ThankYouPage from "./pages/ThankYouPage";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -28,14 +29,14 @@ const App = () => (
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/clothes" element={<ClothesPage />} />
-            <Route path="/district" element={<DistrictPage />} />
-            <Route path="/shops" element={<ShopsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/quantity" element={<QuantityPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/thankyou" element={<ThankYouPage />} />
+            <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+            <Route path="/clothes" element={<ProtectedRoute><ClothesPage /></ProtectedRoute>} />
+            <Route path="/district" element={<ProtectedRoute><DistrictPage /></ProtectedRoute>} />
+            <Route path="/shops" element={<ProtectedRoute><ShopsPage /></ProtectedRoute>} />
+            <Route path="/contact" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
+            <Route path="/quantity" element={<ProtectedRoute><QuantityPage /></ProtectedRoute>} />
+            <Route path="/pricing" element={<ProtectedRoute><PricingPage /></ProtectedRoute>} />
+            <Route path="/thankyou" element={<ProtectedRoute><ThankYouPage /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
