@@ -41,7 +41,13 @@ const QuantityPage = () => {
 
   const handleNext = () => {
     update({ clothQuantities: quantities });
-    navigate('/pricing');
+    if (state.category === 'orphanage') {
+      const orderId = 'RC' + Date.now().toString().slice(-8);
+      update({ clothQuantities: quantities, orderId });
+      navigate('/thankyou');
+    } else {
+      navigate('/pricing');
+    }
   };
 
   return (
