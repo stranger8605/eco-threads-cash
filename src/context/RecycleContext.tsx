@@ -11,6 +11,8 @@ interface RecycleState {
   selectedClothes: string[];
   // Location
   district: string;
+  // Category
+  category: string;
   // Shop
   selectedShop: string;
   // Contact
@@ -39,6 +41,7 @@ const initialState: RecycleState = {
   ageRange: '',
   selectedClothes: [],
   district: '',
+  category: '',
   selectedShop: '',
   address: '',
   contactPhone: '',

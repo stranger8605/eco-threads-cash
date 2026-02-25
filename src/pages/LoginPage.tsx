@@ -12,6 +12,17 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isOtp, setIsOtp] = useState(false);
   const [otp, setOtp] = useState('');
+  const [generatedOtp, setGeneratedOtp] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
+
+  const generateOtp = () => {
+    if (!/^[0-9]{10}$/.test(phone)) return;
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(code);
+    setOtpSent(true);
+    // In production, send via SMS gateway
+    alert(`Your OTP is: ${code}`);
+  };
 
   const handleLogin = () => {
     // Note: In production, authenticate via server-side before setting isLoggedIn
@@ -66,14 +77,35 @@ const LoginPage = () => {
               </button>
             </div>
           ) : (
-            <input
-              type="text"
-              placeholder="Enter 6-digit OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              maxLength={6}
-              className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground text-center text-xl tracking-[0.5em] placeholder:tracking-normal placeholder:text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-            />
+            <div className="space-y-3">
+              <input
+                type="text"
+                placeholder="Enter 6-digit OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+                maxLength={6}
+                className="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground text-center text-xl tracking-[0.5em] placeholder:tracking-normal placeholder:text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              {!otpSent ? (
+                <button
+                  onClick={generateOtp}
+                  disabled={!/^[0-9]{10}$/.test(phone)}
+                  className="w-full py-2.5 rounded-xl font-medium text-primary border-2 border-primary hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Send OTP
+                </button>
+              ) : (
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground">OTP sent to {phone}</p>
+                  <button
+                    onClick={generateOtp}
+                    className="text-sm text-primary font-medium hover:underline"
+                  >
+                    Resend
+                  </button>
+                </div>
+              )}
+            </div>
           )}
 
           <div className="flex justify-between text-sm">
@@ -90,7 +122,7 @@ const LoginPage = () => {
 
           <button
             onClick={handleLogin}
-            disabled={!/^[0-9]{10}$/.test(phone) || (!isOtp && password.length < 8) || (isOtp && !/^[0-9]{6}$/.test(otp))}
+            disabled={!/^[0-9]{10}$/.test(phone) || (!isOtp && password.length < 8) || (isOtp && (!otpSent || otp !== generatedOtp))}
             className="w-full py-3.5 rounded-xl font-semibold text-primary-foreground eco-gradient eco-shadow disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
           >
             {isOtp ? 'Verify OTP' : 'Login'}
