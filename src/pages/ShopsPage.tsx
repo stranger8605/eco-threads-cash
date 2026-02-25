@@ -25,12 +25,12 @@ const ShopsPage = () => {
 
   return (
     <StepLayout
-      step={4}
-      totalSteps={8}
+      step={5}
+      totalSteps={9}
       title="Select a Shop"
       subtitle={`Verified shops in ${state.district || 'your area'}`}
       onNext={handleNext}
-      onBack={() => navigate('/district')}
+      onBack={() => navigate('/categories')}
       nextDisabled={!selected}
     >
       <div className="mb-4 flex items-center gap-2 bg-accent/50 rounded-lg p-3">

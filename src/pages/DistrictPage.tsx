@@ -22,7 +22,7 @@ const DistrictPage = () => {
 
   const handleNext = () => {
     update({ district });
-    navigate('/shops');
+    navigate('/categories');
   };
 
   return (
