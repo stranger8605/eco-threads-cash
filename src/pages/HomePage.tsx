@@ -17,7 +17,7 @@ const HomePage = () => {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Cloth recycling" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="Cloth recycling" className="w-full h-full object-cover" fetchPriority="high" sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-background" />
         </div>
         <div className="relative container max-w-lg mx-auto px-4 pt-16 pb-24 text-center">
