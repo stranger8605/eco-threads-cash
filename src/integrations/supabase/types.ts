@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          address: string | null
+          age_range: string | null
+          category: string | null
+          cloth_quantities: Json | null
+          contact_phone: string | null
+          created_at: string
+          district: string | null
+          gender: string | null
+          id: string
+          order_id: string
+          payment_method: string | null
+          phone: string | null
+          pickup_date: string | null
+          pickup_time: string | null
+          selected_clothes: string[] | null
+          selected_shop: string | null
+          status: string
+          total_amount: number | null
+          total_items: number | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          age_range?: string | null
+          category?: string | null
+          cloth_quantities?: Json | null
+          contact_phone?: string | null
+          created_at?: string
+          district?: string | null
+          gender?: string | null
+          id?: string
+          order_id: string
+          payment_method?: string | null
+          phone?: string | null
+          pickup_date?: string | null
+          pickup_time?: string | null
+          selected_clothes?: string[] | null
+          selected_shop?: string | null
+          status?: string
+          total_amount?: number | null
+          total_items?: number | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          age_range?: string | null
+          category?: string | null
+          cloth_quantities?: Json | null
+          contact_phone?: string | null
+          created_at?: string
+          district?: string | null
+          gender?: string | null
+          id?: string
+          order_id?: string
+          payment_method?: string | null
+          phone?: string | null
+          pickup_date?: string | null
+          pickup_time?: string | null
+          selected_clothes?: string[] | null
+          selected_shop?: string | null
+          status?: string
+          total_amount?: number | null
+          total_items?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
