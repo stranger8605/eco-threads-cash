@@ -15,6 +15,7 @@ import ContactPage from "./pages/ContactPage";
 import QuantityPage from "./pages/QuantityPage";
 import PricingPage from "./pages/PricingPage";
 import ThankYouPage from "./pages/ThankYouPage";
+import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/quantity" element={<ProtectedRoute><QuantityPage /></ProtectedRoute>} />
             <Route path="/pricing" element={<ProtectedRoute><PricingPage /></ProtectedRoute>} />
             <Route path="/thankyou" element={<ProtectedRoute><ThankYouPage /></ProtectedRoute>} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

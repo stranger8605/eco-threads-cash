@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecycle } from '@/context/RecycleContext';
+import { supabase } from '@/integrations/supabase/client';
 import StepLayout from '@/components/StepLayout';
 import { IndianRupee, Wallet, Smartphone, Banknote } from 'lucide-react';
+import { toast } from 'sonner';
 
 const priceMap: Record<string, number> = {
   'cotton-shirt': 50,
@@ -46,8 +48,35 @@ const PricingPage = () => {
 
   const total = lineItems.reduce((sum, item) => sum + item.qty * item.price, 0);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     const orderId = 'RC' + Date.now().toString().slice(-8);
+    const totalItems = lineItems.reduce((s, i) => s + i.qty, 0);
+
+    const { error } = await supabase.from('orders').insert({
+      order_id: orderId,
+      phone: state.phone,
+      gender: state.gender,
+      age_range: state.ageRange,
+      selected_clothes: state.selectedClothes,
+      cloth_quantities: state.clothQuantities as any,
+      district: state.district,
+      category: state.category,
+      selected_shop: state.selectedShop,
+      address: state.address,
+      contact_phone: state.contactPhone,
+      pickup_date: state.pickupDate,
+      pickup_time: state.pickupTime,
+      payment_method: payment,
+      total_items: totalItems,
+      total_amount: total,
+      status: 'pending',
+    } as any);
+
+    if (error) {
+      toast.error('Failed to place order. Please try again.');
+      return;
+    }
+
     update({ paymentMethod: payment, orderId });
     navigate('/thankyou');
   };
