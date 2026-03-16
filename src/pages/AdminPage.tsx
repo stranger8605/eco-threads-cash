@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { Search, RefreshCw, Package, Clock, CheckCircle2, XCircle, Trash2, Eye } from 'lucide-react';
+import { Search, RefreshCw, Package, Clock, CheckCircle2, XCircle, Trash2, Eye, FileDown } from 'lucide-react';
+import { generateAdminReportPdf } from '@/lib/generateAdminReportPdf';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 
@@ -154,6 +155,12 @@ const AdminPage = () => {
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
+          <button
+            onClick={() => generateAdminReportPdf(filtered, statusFilter)}
+            className="px-4 py-2.5 rounded-xl border border-input bg-card text-foreground hover:bg-accent transition-colors flex items-center gap-2 font-medium"
+          >
+            <FileDown className="w-4 h-4" /> Export PDF
+          </button>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
