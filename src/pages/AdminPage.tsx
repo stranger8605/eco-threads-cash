@@ -160,7 +160,13 @@ const AdminPage = () => {
             onClick={() => generateAdminReportPdf(filtered, statusFilter)}
             className="px-4 py-2.5 rounded-xl border border-input bg-card text-foreground hover:bg-accent transition-colors flex items-center gap-2 font-medium"
           >
-            <FileDown className="w-4 h-4" /> Export PDF
+            <FileDown className="w-4 h-4" /> PDF
+          </button>
+          <button
+            onClick={() => generateAdminReportCsv(filtered)}
+            className="px-4 py-2.5 rounded-xl border border-input bg-card text-foreground hover:bg-accent transition-colors flex items-center gap-2 font-medium"
+          >
+            <FileDown className="w-4 h-4" /> CSV
           </button>
           <select
             value={statusFilter}
