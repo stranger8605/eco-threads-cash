@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { Search, RefreshCw, Package, Clock, CheckCircle2, XCircle, Trash2, Eye } from 'lucide-react';
+import { Search, RefreshCw, Package, Clock, CheckCircle2, XCircle, Trash2, Eye, FileDown } from 'lucide-react';
+import { generateAdminReportPdf } from '@/lib/generateAdminReportPdf';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 
