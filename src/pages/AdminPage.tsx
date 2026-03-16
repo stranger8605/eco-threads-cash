@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Search, RefreshCw, Package, Clock, CheckCircle2, XCircle, Trash2, Eye, FileDown } from 'lucide-react';
 import { generateAdminReportPdf } from '@/lib/generateAdminReportPdf';
+import { generateAdminReportCsv } from '@/lib/generateAdminReportCsv';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 
@@ -159,7 +160,13 @@ const AdminPage = () => {
             onClick={() => generateAdminReportPdf(filtered, statusFilter)}
             className="px-4 py-2.5 rounded-xl border border-input bg-card text-foreground hover:bg-accent transition-colors flex items-center gap-2 font-medium"
           >
-            <FileDown className="w-4 h-4" /> Export PDF
+            <FileDown className="w-4 h-4" /> PDF
+          </button>
+          <button
+            onClick={() => generateAdminReportCsv(filtered)}
+            className="px-4 py-2.5 rounded-xl border border-input bg-card text-foreground hover:bg-accent transition-colors flex items-center gap-2 font-medium"
+          >
+            <FileDown className="w-4 h-4" /> CSV
           </button>
           <select
             value={statusFilter}
