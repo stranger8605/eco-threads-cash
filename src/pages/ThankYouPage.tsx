@@ -102,11 +102,25 @@ const ThankYouPage = () => {
           className="space-y-3"
         >
           <div className="flex gap-3">
-            <button className="flex-1 py-3 rounded-xl border border-border bg-card text-foreground font-medium flex items-center justify-center gap-2 hover:bg-accent transition-colors">
-              <Share2 className="w-4 h-4" /> Share
+            <button
+              onClick={() => generateReceiptPdf({
+                orderId: state.orderId,
+                district: state.district,
+                category: state.category,
+                selectedShop: state.selectedShop,
+                address: state.address,
+                contactPhone: state.contactPhone,
+                pickupDate: state.pickupDate,
+                pickupTime: state.pickupTime,
+                paymentMethod: state.paymentMethod,
+                clothQuantities: state.clothQuantities,
+              })}
+              className="flex-1 py-3 rounded-xl border border-border bg-card text-foreground font-medium flex items-center justify-center gap-2 hover:bg-accent transition-colors"
+            >
+              <Download className="w-4 h-4" /> Receipt
             </button>
             <button className="flex-1 py-3 rounded-xl border border-border bg-card text-foreground font-medium flex items-center justify-center gap-2 hover:bg-accent transition-colors">
-              <Star className="w-4 h-4" /> Rate Us
+              <Share2 className="w-4 h-4" /> Share
             </button>
           </div>
           <button
