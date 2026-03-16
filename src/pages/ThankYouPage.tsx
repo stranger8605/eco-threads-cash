@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useRecycle } from '@/context/RecycleContext';
-import { CheckCircle2, Share2, Star, Home } from 'lucide-react';
+import { CheckCircle2, Share2, Star, Home, Download } from 'lucide-react';
+import { generateReceiptPdf } from '@/lib/generateReceiptPdf';
 
 const ThankYouPage = () => {
   const navigate = useNavigate();
